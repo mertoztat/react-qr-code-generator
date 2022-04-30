@@ -1,23 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import QRCode from "qrcode";
+import { useState } from "react";
 
 function App() {
+  const [url, setUrl] = useState("");
+  const [qrCode, setQrCode] = useState("");
+
+  const generateQRCode = () => {
+    QRCode.toDataURL(url, { width: 200, margin: 2 }, (error, url) => {
+      if (error) {
+        return console.error(error);
+      } else {
+        setQrCode(url);
+      }
+    });
+  };
+
+  const handleChange = (e) => {
+    setUrl(e.target.value);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+    <div className="app">
+      <h1>QR Code Generator</h1>
+      <div className="box">
+        <input
+          type="text"
+          placeholder="e.g. https://google.com"
+          value={url}
+          onChange={handleChange}
+        />
+        <button onClick={generateQRCode}>
+          <span>Generate</span>
+        </button>
+        {qrCode && (
+          <div>
+            <img src={qrCode} alt="qrcode" />
+            <a href={qrCode} download="qrcode.png">
+              Click to download QR Code
+            </a>
+          </div>
+        )}
+      </div>
+      <div className="icons">
+        <a href="https://github.com/mertoztat" className="icon">
+          <i class="fa-brands fa-github"></i>
         </a>
-      </header>
+        <a href="https://twitter.com/mertoztat" className="icon">
+          <i class="fa-brands fa-twitter"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/mertoztat" className="icon">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </div>
     </div>
   );
 }
