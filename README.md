@@ -1,3 +1,7 @@
+### In this project, I made an application that we can create and download qr code using the qrcode library with using react.
+
+### Click on [Live Project](https://qr-code-generator-react.netlify.app/).
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
